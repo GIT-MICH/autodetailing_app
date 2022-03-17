@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{%  load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base</title>
+{#    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">#}
+</head>
+<body>
+{#{% include 'biblioteczka/nav_bar.html' %}#}
+{% block zawartość %}
+    {{ message }}
+{% endblock %}
+
+<br>
+{#{{ date }}#}
+<br>
+{#<img src="{%  static 'obraz.jpg' %}">#}
+</body>
+</html>
