@@ -24,6 +24,13 @@ class Worker(models.Model):
     worker_name = models.CharField(max_length=64)
 
 
+class Order(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
+    order = models.IntegerField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+
 class OpeningHours(models.Model):
     day_name = models.CharField(max_length=32, unique=True)
     hours = models.CharField(max_length=32)
@@ -32,11 +39,9 @@ class OpeningHours(models.Model):
         return self.day_name
 
 
-class Order(models.Model):
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
-    order = models.IntegerField(unique=True)
-    created = models.DateTimeField(auto_now_add=True)
+class About(models.Model):
+    title = models.CharField(max_length=64)
+    description = models.TextField()
 
 
 
