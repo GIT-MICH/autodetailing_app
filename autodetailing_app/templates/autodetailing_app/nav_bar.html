@@ -1,0 +1,43 @@
+<div class="topnav">
+  <!-- Centered link -->
+  <div class="topnav-centered">
+    <a href="{% url 'base' %}" class="active">UMÓW SIĘ</a>
+  </div>
+
+  <!-- Left-aligned links (default) -->
+  <a href="{% url 'categories' %}">Kategorie</a>
+  <a href="{% url 'services' %}">Usługi</a>
+  <a href="{% url 'opinion-add' %}">Dodaj opinię</a>
+
+  <!-- Right-aligned links -->
+  <div class="topnav-right">
+{#    {% if user.is_authenticated %}#}
+    <a href="">Wyloguj</a>
+{#    {% else %}#}
+    <a href="">Zaloguj</a>
+    <a href="">Rejestracja</a>
+{#    {% endif %}#}
+  </div>
+</div>
+
+
+
+
+{#   <a href="{% url 'base' %}">TEST</a>#}
+{#   <a href="{% url 'list_author' %}">Lista autorów</a>#}
+{#    {% if perms.biblioteczka.add_book %}#}
+{#   <a href="{% url 'add_book' %}">Dodaj książkę</a>#}
+{#    {% endif %}#}
+{#   <a href="{% url 'add_publisher' %}">Dodaj wydawcę</a>#}
+{#   <a href="{% url 'create_publisher' %}">Create wydawcę</a>#}
+{#    <a href="{% url 'add_publisher_model' %}">Create wydawcę_2</a>#}
+{#   <a href="{% url 'list_book' %}">Lista książek</a>#}
+{##}
+{#    {% if user.is_authenticated %}#}
+{#    <a href="{% url 'logout' %}">Wyloguj</a>#}
+{#    {% else %}#}
+{#    <a href="{% url 'view_login' %}">Zaloguj</a>#}
+{#    <a href="{% url 'registration' %}">Rejestracja</a>#}
+{#    {% endif %}#}
+
+

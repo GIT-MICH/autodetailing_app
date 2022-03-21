@@ -6,25 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock title %} | AUTODETAILING SERVICE</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style_buttons.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'image_center.css' %}">
 </head>
 <body style="background-color: darkgrey">
+{% include 'autodetailing_app/nav_bar.html' %}
+<br><br>
 
 {% block nagłówek %}
-    <br>
-    <h2 style="margin: 0 auto; width: 656px; text-align: center;">AUTODETAILING SERVICE</h2>
+    <h3>O aplikacji...</h3>
 {% endblock %}
-
-<br><br><br><br>
 
 {% block zawartość %}
-    <div style="margin: 0 auto; width: 656px; text-align: center;">
-        <a class="button" href="/main/">STRONA GŁÓWNA</a>
-        <a class="button button2" href="/register/">ZAREJSETRUJ SIĘ</a>
-    </div>
+    <p>{{ about.description }}</p>
 {% endblock %}
-<br><br><br>
+
+<br>
 <img src="{% static 'img.png' %}" alt="Autodetailing" class="center">
 <footer>
     <p>Autor: Michał Złakowski</p>
@@ -35,6 +33,4 @@
 <br>
 
 </body>
-
-
 </html>

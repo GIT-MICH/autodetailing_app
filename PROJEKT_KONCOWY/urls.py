@@ -15,10 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from autodetailing_app.views import Base
+from autodetailing_app.views import (MainView,
+                                     FirstView,
+                                     CategoriesView,
+                                     AddServiceView,
+                                     AddOpinionView,
+                                     ServicesView,
+                                     ServiceDetailView
+                                     )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('base/', Base.as_view(), name='base'),
+    path('', FirstView.as_view(), name='base'),
+    path('main/', MainView.as_view(), name='main'),
+    path('categories/', CategoriesView.as_view(), name='categories'),
+    path('add_service/', AddServiceView.as_view(), name='service-add'),
+    path('add_opinion/', AddOpinionView.as_view(), name='opinion-add'),
+    path('services/', ServicesView.as_view(), name='services'),
+    path('service/<int:id>', ServiceDetailView.as_view(), name='service-detail')
 
 ]

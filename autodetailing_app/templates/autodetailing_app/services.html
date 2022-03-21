@@ -1,0 +1,12 @@
+{% extends 'autodetailing_app/base_with_navbar.html' %}
+{% block nagłówek %}
+    <h3>RODZAJE USŁUG:</h3>
+{% endblock %}
+
+{% block zawartość %}
+    <ul>
+    {% for service in services %}
+        <li><a href="{{ service.get_absolute_url }}">{{ service.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
