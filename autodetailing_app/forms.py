@@ -14,6 +14,5 @@ class AddServiceForm(forms.ModelForm):
 class AddOpinionForm(forms.ModelForm):
     class Meta:
         model = Opinion
-        fields = '__all__'
-        widgets = {'user': forms.HiddenInput}
+        exclude = ['user']
         labels = {'description': 'Opinia'}

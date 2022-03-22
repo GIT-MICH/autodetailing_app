@@ -1,0 +1,12 @@
+{% extends 'autodetailing_app/base_with_navbar.html' %}
+{% block nagłówek %}
+    <h3 style="text-align: center; color: darkslategray;border-width:10px;border-style:solid;border-color:#333">KATEGORIA: {{ category }} </h3>
+{% endblock %}
+
+{% block zawartość %}
+    <ul>
+    {% for service in inside_services %}
+        <li><a href="{{ service.get_absolute_url }}">{{ service.name }}</a>, cena: {{ service.price }} zł</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

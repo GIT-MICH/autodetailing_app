@@ -16,6 +16,9 @@ class Service(models.Model):
     def get_absolute_url(self):
         return reverse('service-detail', args=(self.id,))
 
+    def __str__(self):
+        return self.name
+
 
 class Category(models.Model):
     name = models.CharField(max_length=64, unique=True)
@@ -27,6 +30,9 @@ class Category(models.Model):
 
 class Worker(models.Model):
     name = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.name
 
 
 class Order(models.Model):

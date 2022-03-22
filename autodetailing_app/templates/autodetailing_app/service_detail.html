@@ -8,8 +8,8 @@
         <li>{{ service.description }}</li>
         <li>Czas wykonania: {{ service.duration }} min.</li>
         <li>Cena: {{ service.price }} zł</li>
-{#        {% for category in categories %}#}
-        <li>Kategoria: {{ service.category }}</li>
-{#        {% endfor %}#}
+        {% for category in service.categories.all %}
+        <li>Kategoria: {{ category }}</li>
+        {% endfor %}
     </ul>
 {% endblock %}

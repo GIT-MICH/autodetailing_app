@@ -44,7 +44,9 @@ class AddOpinionView(View):
     def post(self, request):
         form = AddOpinionForm(request.POST)
         if form.is_valid():
-            opinion = form.save()
+            opinion = form.save(commit=False)
+            opinion.user = request.user
+            opinion.save()
             return redirect('main')
         return render(request, 'autodetailing_app/opinion_form.html', {'form': form})
 
@@ -58,5 +60,20 @@ class ServicesView(View):
 class ServiceDetailView(View):
     def get(self, request, id):
         service = Service.objects.get(id=id)
-        # categories = Category.objects.all()
         return render(request, 'autodetailing_app/service_detail.html', {'service': service})
+
+
+class OutsideServicesView(View):
+    def get(self, request):
+        category = Category.objects.get(id=1)
+        outside_services = Service.objects.filter(categories=1)
+        return render(request, 'autodetailing_app/services_outside.html',
+                      {'outside_services': outside_services, 'category': category})
+
+
+class InsideServicesView(View):
+    def get(self, request):
+        category = Category.objects.get(id=2)
+        inside_services = Service.objects.filter(categories=2)
+        return render(request, 'autodetailing_app/services_inside.html',
+                      {'inside_services': inside_services, 'category': category})
