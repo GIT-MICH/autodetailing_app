@@ -16,24 +16,26 @@
 
 {% block nagłówek %}
     <ul>
-        {% for category in categories %}
-            <li>{{ category.name }}: {{ category.description }}</li><br>
-        {% endfor %}
+        <div style="text-align: center">
+            {% for category in categories %}
+                <li>{{ category.name }}: {{ category.description }}</li><br>
+            {% endfor %}
+        </div>
     </ul>
 {% endblock %}
 
 {% block zawartość %}
-<div style="margin: 0 auto; width: 656px; text-align: center;">
-    <a class="button" href="/inside/">WEWNĄTRZ</a>
-    <a class="button button2" href="/outside/">NA ZEWNĄTRZ</a>
-</div>
+    <div style="margin: 0 auto; width: 656px; text-align: center;">
+        <a class="button" href="/inside/">WEWNĄTRZ</a>
+        <a class="button button2" href="/outside/">NA ZEWNĄTRZ</a>
+    </div>
 {% endblock %}
 
 <br>
 <img src="{% static 'img.png' %}" alt="Autodetailing" class="center">
+<br><br>
 <footer>
-    <p>Autor: Michał Złakowski</p>
-    <p><a href="mailto:hege@example.com">zlakowski.michal@gmail.com</a></p>
+    <p style="text-align: center; font-size: small">© 2022 M.Złakowski</p>
 </footer>
 <br>
 {#{{ date }}#}

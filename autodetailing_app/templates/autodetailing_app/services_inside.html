@@ -7,6 +7,8 @@
     <ul>
     {% for service in inside_services %}
         <li><a href="{{ service.get_absolute_url }}">{{ service.name }}</a>, cena: {{ service.price }} zł</li>
+        <br>
     {% endfor %}
     </ul>
+
 {% endblock %}
