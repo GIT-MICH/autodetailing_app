@@ -1,15 +1,16 @@
 {% extends 'autodetailing_app/base_with_navbar.html' %}
 {% block nagłówek %}
-    <h3>{{ service.name }}</h3>
+    <h3 style="text-decoration: underline">{{ service.name }}</h3>
 {% endblock %}
 
 {% block zawartość %}
     <ul>
         <li>{{ service.description }}</li>
+        <br>
         <li>Czas wykonania: {{ service.duration }} min.</li>
         <li>Cena: {{ service.price }} zł</li>
         {% for category in service.categories.all %}
-        <li>Kategoria: {{ category }}</li>
+            <li>Kategoria: {{ category }}</li>
         {% endfor %}
     </ul>
 {% endblock %}

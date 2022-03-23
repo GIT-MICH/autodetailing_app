@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse
+from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
 
-from autodetailing_app.forms import AddServiceForm, AddOpinionForm
+from autodetailing_app.forms import AddServiceForm, AddOpinionForm, AddWorkerForm, CartForm
 from autodetailing_app.models import Category, Service, About
 
 
@@ -77,3 +77,27 @@ class InsideServicesView(View):
         inside_services = Service.objects.filter(categories=2)
         return render(request, 'autodetailing_app/services_inside.html',
                       {'inside_services': inside_services, 'category': category})
+
+
+class AddWorkerView(View):
+    def get(self, request):
+        form = AddWorkerForm()
+        return render(request, 'autodetailing_app/worker_form.html', {'form': form})
+
+    def post(self, request):
+        form = AddWorkerForm(request.POST)
+        if form.is_valid():
+            worker = form.save()
+            return redirect('worker-add')
+        return render(request, 'autodetailing_app/worker_form.html', {'form': form})
+
+
+class CartView(View):
+    def get(self, request):
+        form = CartForm()
+        return render(request, 'autodetailing_app/cart_form.html', {'form': form})
+
+    # def post(self, request):
+    #     form = CartForm(request.POST)
+    #     if form.is_valid():
+

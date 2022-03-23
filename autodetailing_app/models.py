@@ -16,6 +16,9 @@ class Service(models.Model):
     def get_absolute_url(self):
         return reverse('service-detail', args=(self.id,))
 
+    def upper_name(self):
+        return self.name.upper()
+
     def __str__(self):
         return self.name
 
@@ -44,8 +47,8 @@ class Order(models.Model):
 
 class Cart(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
+    worker = models.ForeignKey(Worker, on_delete=models.CASCADE, default=None)
+    created = models.DateField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 

@@ -1,0 +1,12 @@
+{% extends 'autodetailing_app/base_with_navbar.html' %}
+{% block nagłówek %}
+    <h3>ZAMÓW USŁUGĘ:</h3>
+{% endblock %}
+
+{% block zawartość %}
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="ZAMÓW">
+    </form>
+{% endblock %}
