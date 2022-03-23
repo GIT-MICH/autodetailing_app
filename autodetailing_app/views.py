@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import View
 
 from autodetailing_app.forms import AddServiceForm, AddOpinionForm, AddWorkerForm, CartForm
-from autodetailing_app.models import Category, Service, About
+from autodetailing_app.models import Category, Service, About, Cart
 
 
 class FirstView(View):
@@ -97,7 +97,14 @@ class CartView(View):
         form = CartForm()
         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
 
-    # def post(self, request):
-    #     form = CartForm(request.POST)
-    #     if form.is_valid():
+    def post(self, request):
+        form = CartForm(request.POST)
+        if form.is_valid():
+            service = form.cleaned_data.get('service')
+            worker = form.cleaned_data.get('worker')
+            created = form.cleaned_data.get('created')
+            Cart.objects.create(service=service, worker=worker, created=created)
+            return redirect('main')
+        return render(request, 'autodetailing_app/cart_form.html', {'form': form})
+
 
