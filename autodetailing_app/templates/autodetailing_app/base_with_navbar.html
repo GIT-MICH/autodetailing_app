@@ -26,8 +26,8 @@
 
 {% block zawartość %}
     <div style="margin: 0 auto; width: 656px; text-align: center;">
-        <a class="button" href="/inside/">WEWNĄTRZ</a>
-        <a class="button button2" href="/outside/">NA ZEWNĄTRZ</a>
+        <a class="button" href="{% url 'inside' %}">WEWNĄTRZ</a>
+        <a class="button button2" href="{% url 'outside' %}">NA ZEWNĄTRZ</a>
     </div>
 {% endblock %}
 

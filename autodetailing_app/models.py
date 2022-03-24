@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class Service(models.Model):
     name = models.CharField(max_length=128, verbose_name='Nazwa usługi')
-    # image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
     description = models.TextField(verbose_name='Opis')
     duration = models.IntegerField(verbose_name='Czas wykonania (min.)')
     # price = models.DecimalField(max_digits=6, decimal_places=2)

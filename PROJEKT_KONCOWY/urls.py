@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 from autodetailing_app.views import (MainView,
                                      FirstView,
                                      CategoriesView,
@@ -32,16 +36,7 @@ from autodetailing_app.views import (MainView,
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', FirstView.as_view(), name='base'),
-    path('main/', MainView.as_view(), name='main'),
-    path('categories/', CategoriesView.as_view(), name='categories'),
-    path('outside/', OutsideServicesView.as_view(), name='outside'),
-    path('inside/', InsideServicesView.as_view(), name='inside'),
-    path('add_service/', AddServiceView.as_view(), name='service-add'),
-    path('del_service/<int:id>/', DeleteServiceView.as_view(), name='service-delete'),
-    path('add_opinion/', AddOpinionView.as_view(), name='opinion-add'),
-    path('add_worker/', AddWorkerView.as_view(), name='worker-add'),
-    path('services/', ServicesView.as_view(), name='services'),
-    path('service/<int:id>', ServiceDetailView.as_view(), name='service-detail'),
-    path('cart/', CartView.as_view(), name='cart')
-
+    path('autodetailing/', include('autodetailing_app.urls')),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
