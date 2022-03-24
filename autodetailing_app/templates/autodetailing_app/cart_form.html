@@ -5,8 +5,13 @@
 
 {% block zawartość %}
     <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input style="background-color: darkorange; font-size: 16px" type="submit" value="ZAMÓW">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br><br>
+        <div>Łączna kwota do zapłaty: <strong>{{ service.price }} zł</strong></div>
+        <br><br>
+        <div>Czas potrzebny na realizację usługi: <strong>{{ service.min_to_hours }} h.</strong></div>
+        <br><br>
+        <input style="background-color: darkorange; font-size: 16px" type="submit" value="ZAMÓW">
     </form>
 {% endblock %}

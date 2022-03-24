@@ -16,8 +16,14 @@ class Service(models.Model):
     def get_absolute_url(self):
         return reverse('service-detail', args=(self.id,))
 
+    def remove_url(self):
+        return reverse('service-delete', args=(self.id,))
+
     def upper_name(self):
         return self.name.upper()
+
+    def min_to_hours(self):
+        return self.duration / 60
 
     def __str__(self):
         return self.name
@@ -28,7 +34,7 @@ class Category(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return f'{self.name}'
+        return self.name
 
 
 class Worker(models.Model):

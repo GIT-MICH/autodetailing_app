@@ -53,7 +53,7 @@ class AddOpinionView(View):
 
 class ServicesView(View):
     def get(self, request):
-        services = Service.objects.all()
+        services = Service.objects.all().order_by('name')
         return render(request, 'autodetailing_app/services.html', {'services': services})
 
 
@@ -61,6 +61,13 @@ class ServiceDetailView(View):
     def get(self, request, id):
         service = Service.objects.get(id=id)
         return render(request, 'autodetailing_app/service_detail.html', {'service': service})
+
+
+class DeleteServiceView(View):
+    def get(self, request, id):
+        service = Service.objects.get(id=id)
+        service.delete()
+        return redirect('services')
 
 
 class OutsideServicesView(View):
@@ -95,15 +102,18 @@ class AddWorkerView(View):
 class CartView(View):
     def get(self, request):
         form = CartForm()
-        return render(request, 'autodetailing_app/cart_form.html', {'form': form})
+        services = Service.objects.all()
+        return render(request, 'autodetailing_app/cart_form.html', {'form': form, 'services': services})
 
     def post(self, request):
         form = CartForm(request.POST)
+        service = Service.objects.all()
         if form.is_valid():
             service = form.cleaned_data.get('service')
             worker = form.cleaned_data.get('worker')
             created = form.cleaned_data.get('created')
-            Cart.objects.create(service=service, worker=worker, created=created)
+            user = request.user
+            Cart.objects.create(service=service, worker=worker, created=created, user=user)
             return redirect('main')
         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
 

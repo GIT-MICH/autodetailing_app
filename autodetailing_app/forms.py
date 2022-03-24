@@ -8,7 +8,7 @@ class AddServiceForm(forms.ModelForm):
     class Meta:
         model = Service
         fields = '__all__'
-        widgets = {'categories': forms.RadioSelect()}
+        widgets = {'categories': forms.CheckboxSelectMultiple()}
 
 
 class AddOpinionForm(forms.ModelForm):

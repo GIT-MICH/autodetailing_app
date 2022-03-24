@@ -5,8 +5,10 @@
 
 {% block zawartość %}
     <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input style="background-color: darkorange; font-size: 16px" type="submit" value="DODAJ USŁUGĘ">
+        {% csrf_token %}
+        <div>
+            {{ form.as_p }}
+            <input style="background-color: darkorange; font-size: 16px" type="submit" value="DODAJ USŁUGĘ">
+        </div>
     </form>
 {% endblock %}

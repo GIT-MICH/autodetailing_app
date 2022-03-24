@@ -6,7 +6,7 @@
 {% block zawartość %}
     <ul>
     {% for service in inside_services %}
-        <li><a href="{{ service.get_absolute_url }}">{{ service.upper_name }}</a>, cena: {{ service.price }} zł</li>
+        <li>{{ service.upper_name }} <a href="{{ service.get_absolute_url }}">(szczegóły)</a>, cena: {{ service.price }} zł</li>
         <br>
     {% endfor %}
     </ul>

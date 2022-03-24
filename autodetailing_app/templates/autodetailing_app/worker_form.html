@@ -6,7 +6,7 @@
 {% block zawartość %}
     <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.as_table }}
     <input style="background-color: darkorange; font-size: 16px" type="submit" value="DODAJ PRACOWNIKA">
     </form>
 {% endblock %}
