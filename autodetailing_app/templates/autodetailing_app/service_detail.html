@@ -1,4 +1,4 @@
-{% extends 'autodetailing_app/base_with_navbar.html' %}
+{% extends 'autodetailing_app/base_navbar_image.html' %}
 {% block nagłówek %}
     <h3 style="text-decoration: underline">{{ service.upper_name }}</h3>
 {% endblock %}
@@ -12,5 +12,9 @@
         {% for category in service.categories.all %}
             <li>Kategoria: {{ category }}</li>
         {% endfor %}
+        {% if service.image %}
+            <img src="{{ service.image.url }}" class="center">
+        {% endif %}
     </ul>
+
 {% endblock %}
