@@ -117,9 +117,8 @@ class CartView(View):
             cart.worker = worker
             cart.meeting_date = meeting_date
             cart.save()
-            return redirect('cart') #tutaj link do twoje zamowienia
+            return redirect('cart') #tutaj link do twoich zamowien
         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
-
 
 
 class AddServiceToCartView(View):
