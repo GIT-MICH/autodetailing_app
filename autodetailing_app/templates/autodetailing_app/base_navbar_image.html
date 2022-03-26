@@ -15,20 +15,9 @@
 <br><br>
 
 {% block nagłówek %}
-    <ul>
-        <div style="text-align: center">
-            {% for category in categories %}
-                <li>{{ category.name }}: {{ category.description }}</li><br>
-            {% endfor %}
-        </div>
-    </ul>
 {% endblock %}
 
 {% block zawartość %}
-    <div style="margin: 0 auto; width: 656px; text-align: center;">
-        <a class="button" href="{% url 'inside' %}">WEWNĄTRZ</a>
-        <a class="button button2" href="{% url 'outside' %}">NA ZEWNĄTRZ</a>
-    </div>
 {% endblock %}
 
 <br>
