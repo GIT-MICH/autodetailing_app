@@ -126,6 +126,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/michalczewski/PycharmProjects/Projekt_koncowy/PROJEKT_KONCOWY/media/'
 
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
