@@ -8,9 +8,9 @@ class Service(models.Model):
     name = models.CharField(max_length=128, verbose_name='Nazwa usługi')
     image = models.ImageField(blank=True, null=True, verbose_name='Dodaj plik')
     description = models.TextField(verbose_name='Opis')
-    duration = models.IntegerField(verbose_name='Czas wykonania (min.)')
+    duration = models.IntegerField(verbose_name='Czas wykonania (min.)', default=0)
     # price = models.DecimalField(max_digits=6, decimal_places=2)
-    price = models.FloatField(verbose_name='Cena (zł)')
+    price = models.FloatField(verbose_name='Cena (zł)', default=0)
     categories = models.ManyToManyField('Category')
 
     def get_absolute_url(self):
@@ -18,6 +18,9 @@ class Service(models.Model):
 
     def remove_url(self):
         return reverse('service-delete', args=(self.id,))
+
+    def add_to_card_url(self):
+        return reverse('add-service-to-card', args=(self.id,))
 
     def upper_name(self):
         return self.name.upper()
@@ -44,19 +47,30 @@ class Worker(models.Model):
         return self.name
 
 
+class Cart(models.Model):
+    services = models.ManyToManyField(Service)
+    worker = models.ForeignKey(Worker, on_delete=models.CASCADE, default=None, null=True)
+    meeting_date = models.DateField(null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def get_total_value(self):
+        suma = 0
+        for service in self.services.all():
+            suma += service.price
+        return suma
+
+    def get_total_time(self):
+        total = 0
+        for service in self.services.all():
+            total += service.duration
+        return round(total / 60, 0)
+
+
 class Order(models.Model):
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    services = models.ManyToManyField(Service)
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
-class Cart(models.Model):
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    worker = models.ForeignKey(Worker, on_delete=models.CASCADE, default=None)
-    created = models.DateField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
 
 # class OpeningHours(models.Model):
 #     day_name = models.CharField(max_length=32, unique=True)

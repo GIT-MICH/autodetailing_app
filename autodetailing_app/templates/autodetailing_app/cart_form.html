@@ -1,6 +1,14 @@
 {% extends 'autodetailing_app/base_with_navbar.html' %}
 {% block nagłówek %}
-    <h3>WYBIERZ USŁUGI:</h3>
+    <h3>JUŻ PRAWIE KONIEC... :)</h3>
+    <h4>Wybrane usługi do realizacji:</h4>
+    <ul>
+        {% for service in user.cart.services.all %}
+            <li>{{ service.upper_name }}</li>
+            <br>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
 
 {% block zawartość %}
@@ -8,9 +16,9 @@
         {% csrf_token %}
         {{ form.as_p }}
         <br><br>
-        <div>Łączna kwota do zapłaty: <strong>{{ service.price }} zł</strong></div>
+        <div>Łączna kwota do zapłaty: <strong>{{ user.cart.get_total_value }} zł</strong></div>
         <br><br>
-        <div>Czas potrzebny na realizację usługi: <strong>{{ service.min_to_hours }} h.</strong></div>
+        <div>Czas potrzebny na realizację usługi ~ <strong>{{ user.cart.get_total_time }} h.</strong></div>
         <br><br>
         <input style="background-color: darkorange; font-size: 16px" type="submit" value="ZAMÓW">
     </form>

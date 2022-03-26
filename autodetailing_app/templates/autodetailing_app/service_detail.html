@@ -7,14 +7,15 @@
     <ul>
         <li>{{ service.description }}</li>
         <br>
-        <li>Czas wykonania: {{ service.duration }} min.</li>
-        <li>Cena: {{ service.price }} zł</li>
+        <li>Czas wykonania: <strong>{{ service.duration }} min.</strong></li>
+        <li>Cena: <strong>{{ service.price }} zł</strong></li>
         {% for category in service.categories.all %}
             <li>Kategoria: {{ category }}</li>
         {% endfor %}
+        <br>
+        <a class="button button2" href="{{ service.add_to_card_url }}">DODAJ DO KOSZYKA</a>
         {% if service.image %}
             <img src="{{ service.image.url }}" class="center">
         {% endif %}
     </ul>
-
 {% endblock %}

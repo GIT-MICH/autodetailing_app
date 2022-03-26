@@ -7,7 +7,11 @@
 {% block zawartość %}
     <ul>
     {% for service in services %}
-        <li>{{ service.upper_name }} <a href="{{ service.get_absolute_url }}">(szczegóły)</a> <a href="{{ service.remove_url }}">(usuń)</a></li>
+        <li>{{ service.upper_name }}
+            <a style="color: darkgreen" href="{{ service.get_absolute_url }}">(szczegóły)</a>
+            <a style="color: red" href="{{ service.remove_url }}">(usuń)</a>
+            <a style="color: royalblue" href="{{ service.add_to_card_url }}">(dodaj do koszyka)</a>
+        </li>
         <br>
     {% endfor %}
     </ul>
