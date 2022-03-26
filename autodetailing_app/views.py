@@ -102,17 +102,33 @@ class AddWorkerView(View):
 class CartView(View):
     def get(self, request):
         form = CartForm()
-        services = Service.objects.all()
-        return render(request, 'autodetailing_app/cart_form.html', {'form': form, 'services': services})
+        return render(request, 'autodetailing_app/cart_form.html', {'form': form})
 
     def post(self, request):
         form = CartForm(request.POST)
-        service = Service.objects.all()
         if form.is_valid():
-            service = form.cleaned_data.get('service')
             worker = form.cleaned_data.get('worker')
-            created = form.cleaned_data.get('created')
+            meeting_date = form.cleaned_data.get('meeting_date')
             user = request.user
-            Cart.objects.create(service=service, worker=worker, created=created, user=user)
-            return redirect('main')
+            if hasattr(user, 'cart'):
+                cart = user.cart
+            else:
+                cart = Cart.objects.create(worker=worker, meeting_date=meeting_date, user=user)
+            cart.worker = worker
+            cart.meeting_date = meeting_date
+            cart.save()
+            return redirect('cart') #tutaj link do twoje zamowienia
         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
+
+
+
+class AddServiceToCartView(View):
+    def get(self, request, service_id):
+        service = Service.objects.get(pk=service_id)
+        user = request.user
+        if hasattr(user, 'cart'):
+            cart = user.cart
+        else:
+            cart = Cart.objects.create(user=user)
+        cart.services.add(service)
+        return redirect('services')

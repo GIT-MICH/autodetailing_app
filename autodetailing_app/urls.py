@@ -10,6 +10,7 @@ from autodetailing_app.views import (MainView,
                                      ServicesView,
                                      ServiceDetailView,
                                      CartView,
+                                     AddServiceToCartView,
                                      )
 
 urlpatterns = [
@@ -23,6 +24,7 @@ urlpatterns = [
     path('add_worker/', AddWorkerView.as_view(), name='worker-add'),
     path('services/', ServicesView.as_view(), name='services'),
     path('service/<int:id>', ServiceDetailView.as_view(), name='service-detail'),
-    path('cart/', CartView.as_view(), name='cart')
+    path('cart/', CartView.as_view(), name='cart'),
+    path('service_to_card/<int:service_id>/', AddServiceToCartView.as_view(), name='add-service-to-card'),
 
 ]

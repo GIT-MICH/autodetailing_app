@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pl-pl'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -123,7 +123,7 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = '/home/michalczewski/Pulpit'
+MEDIA_ROOT = '/home/michalczewski/PycharmProjects/Projekt_koncowy/PROJEKT_KONCOWY/media/'
 
 
 # Default primary key field type
