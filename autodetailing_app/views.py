@@ -116,4 +116,3 @@ class CartView(View):
             Cart.objects.create(service=service, worker=worker, created=created, user=user)
             return redirect('main')
         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
-
