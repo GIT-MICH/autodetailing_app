@@ -117,4 +117,3 @@ class CartView(View):
             return redirect('main')
         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
 
-
