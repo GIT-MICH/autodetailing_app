@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from autodetailing_app.models import Service, Opinion, Worker, Cart
+from autodetailing_app.models import Service, Opinion, Worker, Cart, Order
 
 
 class AddServiceForm(forms.ModelForm):
@@ -32,6 +32,20 @@ class CartForm(forms.ModelForm):
     class Meta:
         model = Cart
         exclude = ['user', 'services']
+        widgets = {
+            'meeting_date': forms.SelectDateWidget()
+        }
+        labels = {
+            'services': '',
+            'worker': 'Pracownik',
+            'meeting_date': 'Data realizacji'
+        }
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        exclude = ['user', 'services', 'created']
         widgets = {
             'meeting_date': forms.SelectDateWidget()
         }

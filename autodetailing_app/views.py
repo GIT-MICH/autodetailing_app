@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
 
-from autodetailing_app.forms import AddServiceForm, AddOpinionForm, AddWorkerForm, CartForm
-from autodetailing_app.models import Category, Service, About, Cart
+from autodetailing_app.forms import AddServiceForm, AddOpinionForm, AddWorkerForm, CartForm, OrderForm
+from autodetailing_app.models import Category, Service, About, Cart, Order
 
 
 class FirstView(View):
@@ -99,26 +99,46 @@ class AddWorkerView(View):
         return render(request, 'autodetailing_app/worker_form.html', {'form': form})
 
 
-class CartView(View):
+# class CartView(View):
+#     def get(self, request):
+#         form = CartForm()
+#         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
+#
+#     def post(self, request):
+#         form = CartForm(request.POST)
+#         if form.is_valid():
+#             worker = form.cleaned_data.get('worker')
+#             meeting_date = form.cleaned_data.get('meeting_date')
+#             user = request.user
+#             if hasattr(user, 'cart'):
+#                 cart = user.cart
+#             else:
+#                 cart = Cart.objects.create(worker=worker, meeting_date=meeting_date, user=user)
+#             cart.worker = worker
+#             cart.meeting_date = meeting_date
+#             cart.save()
+#             return redirect('cart') #tutaj link do twoich zamowien
+#         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
+
+
+class CreateOrderView(View):
     def get(self, request):
-        form = CartForm()
-        return render(request, 'autodetailing_app/cart_form.html', {'form': form})
+        form = OrderForm()
+        return render(request, 'autodetailing_app/order_form.html', {'form': form})
 
     def post(self, request):
-        form = CartForm(request.POST)
+        form = OrderForm(request.POST)
         if form.is_valid():
             worker = form.cleaned_data.get('worker')
             meeting_date = form.cleaned_data.get('meeting_date')
             user = request.user
-            if hasattr(user, 'cart'):
-                cart = user.cart
-            else:
-                cart = Cart.objects.create(worker=worker, meeting_date=meeting_date, user=user)
-            cart.worker = worker
-            cart.meeting_date = meeting_date
-            cart.save()
-            return redirect('cart') #tutaj link do twoich zamowien
-        return render(request, 'autodetailing_app/cart_form.html', {'form': form})
+            cart = user.cart
+            choose_services = cart.services.all()
+            order = Order.objects.create(worker=worker, meeting_date=meeting_date, user=user)
+            order.services.set(choose_services)
+            cart.services.set([])
+            return redirect('services')
+        return render(request, 'autodetailing_app/order_form.html', {'form': form})
 
 
 class AddServiceToCartView(View):

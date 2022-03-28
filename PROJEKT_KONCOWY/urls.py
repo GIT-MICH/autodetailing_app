@@ -19,19 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from autodetailing_app.views import (MainView,
-                                     FirstView,
-                                     CategoriesView,
-                                     OutsideServicesView,
-                                     InsideServicesView,
-                                     AddServiceView,
-                                     DeleteServiceView,
-                                     AddOpinionView,
-                                     AddWorkerView,
-                                     ServicesView,
-                                     ServiceDetailView,
-                                     CartView,
-                                     )
+from autodetailing_app.views import FirstView
 
 urlpatterns = [
     path('admin/', admin.site.urls),

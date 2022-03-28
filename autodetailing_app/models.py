@@ -68,8 +68,9 @@ class Cart(models.Model):
 
 class Order(models.Model):
     services = models.ManyToManyField(Service)
-    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
+    worker = models.ForeignKey(Worker, on_delete=models.CASCADE, default=None, null=True)
     created = models.DateTimeField(auto_now_add=True)
+    meeting_date = models.DateField(null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 # class OpeningHours(models.Model):
