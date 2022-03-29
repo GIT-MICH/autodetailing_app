@@ -124,7 +124,13 @@ class AddWorkerView(View):
 class CreateOrderView(View):
     def get(self, request):
         form = OrderForm()
-        return render(request, 'autodetailing_app/order_form.html', {'form': form})
+        user = request.user
+        cart = user.cart
+        if len(cart.services.all()) > 0:
+            return render(request, 'autodetailing_app/order_form.html', {'form': form})
+        message = 'Koszyk jest pusty, wybierz usługi.'
+        return render(request, 'autodetailing_app/order_form.html', {'form': form, 'message': message})
+        # return render(request, 'autodetailing_app/order_form.html', {'form': form})
 
     def post(self, request):
         form = OrderForm(request.POST)
@@ -137,7 +143,7 @@ class CreateOrderView(View):
             order = Order.objects.create(worker=worker, meeting_date=meeting_date, user=user)
             order.services.set(choose_services)
             cart.services.set([])
-            return redirect('services')
+            return redirect('user-orders')
         return render(request, 'autodetailing_app/order_form.html', {'form': form})
 
 
@@ -151,3 +157,27 @@ class AddServiceToCartView(View):
             cart = Cart.objects.create(user=user)
         cart.services.add(service)
         return redirect('services')
+
+
+class RemoveServiceFromCartView(View):
+    def get(self, request, service_id):
+        service = Service.objects.get(pk=service_id)
+        user = request.user
+        cart = user.cart
+        cart.services.remove(service)
+        return redirect('order')
+
+
+
+
+class UserOrdersView(View):
+    def get(self, request):
+        user = request.user
+        orders = Order.objects.filter(user=user).order_by('meeting_date')
+        return render(request, 'autodetailing_app/user_orders.html', {'orders': orders})
+
+
+class AllOrdersView(View):
+    def get(self, request):
+        orders = Order.objects.all()
+        return render(request, 'autodetailing_app/all_orders.html', {'orders': orders})

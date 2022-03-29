@@ -1,10 +1,18 @@
 {% extends 'autodetailing_app/base_with_navbar.html' %}
 {% block nagłówek %}
+    {% if message %}
+    <h3>{{ message }}</h3>
+        <br><br>
+    {% else %}
     <h3>JUŻ PRAWIE KONIEC... :)</h3>
     <h4>Wybrane usługi do realizacji:</h4>
+    {% endif %}
     <ul>
         {% for service in user.cart.services.all %}
-            <li>{{ service.upper_name }}</li>
+            <li>{{ service.upper_name }}
+                <br>
+                <a class="button-one" title="Usuwa usługę z koszyka" href="{{ service.remove_service_url }}">USUŃ Z KOSZYKA</a>
+            </li>
             <br>
         {% endfor %}
     </ul>

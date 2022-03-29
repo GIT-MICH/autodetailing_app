@@ -22,6 +22,9 @@ class Service(models.Model):
     def add_to_card_url(self):
         return reverse('add-service-to-card', args=(self.id,))
 
+    def remove_service_url(self):
+        return reverse('remove-service', args=(self.id,))
+
     def upper_name(self):
         return self.name.upper()
 
