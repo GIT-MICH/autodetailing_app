@@ -13,7 +13,15 @@
 </head>
 <body style="background-color: darkgrey">
 {% include 'autodetailing_app/nav_bar.html' %}
-<br><br>
+<br>
+
+{% block user %}
+    {% if user.is_authenticated %}
+        <h5 style="color: #333; text-align: right">Witaj {{ user.username }} !</h5>
+        <h5 style="color: #333; text-align: right">Dziś jest: {{ date }}</h5>
+    {% endif %}
+{% endblock %}
+<br>
 
 {% block nagłówek %}
     <h3>O aplikacji...</h3>

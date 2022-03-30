@@ -13,6 +13,14 @@
 </head>
 <body style="background-color: darkgrey">
 {% include 'autodetailing_app/nav_bar.html' %}
+<br>
+
+{% block user %}
+    {% if user.is_authenticated %}
+        <h5 style="color: #333; text-align: right">Witaj {{ user.username }} !</h5>
+        <h5 style="color: #333; text-align: right">Dziś jest: {{ date }}</h5>
+    {% endif %}
+{% endblock %}
 <br><br>
 
 {% block nagłówek %}
@@ -27,7 +35,6 @@
     <p style="text-align: center; font-size: small">© 2022 M.Złakowski</p>
 </footer>
 <br>
-{#{{ date }}#}
 <br>
 
 </body>

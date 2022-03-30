@@ -1,4 +1,9 @@
+<!-- First navbar -->
 <div class="topnav">
+<!-- Centered link -->
+    <div class="topnav-centered">
+        <a href="{% url 'main' %}" class="active"> || STRONA GŁÓWNA ||</a>
+    </div>
 
     <!-- Left-aligned links (default) -->
     <a href="{% url 'categories' %}">| KATEGORIE |</a>
@@ -15,8 +20,9 @@
         {% endif %}
     </div>
 </div>
+<!-- End first navbar -->
 
-<!-- Dropdown-menu -->
+<!-- Second navbar -->
 <div class="topnav">
     <!-- Centered link -->
     <div class="topnav-centered">
@@ -37,3 +43,4 @@
         {% endif %}
     </div>
 </div>
+<!-- End second navbar -->
