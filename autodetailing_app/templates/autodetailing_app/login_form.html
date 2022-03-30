@@ -1,0 +1,12 @@
+{% extends 'autodetailing_app/base_with_navbar.html' %}
+{% block nagłówek %}
+    <h3>ZALOGUJ SIĘ:</h3>
+{% endblock %}
+
+{% block zawartość %}
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input style="background-color: darkorange; font-size: 16px" type="submit" value="ZALOGUJ">
+    </form>
+{% endblock %}

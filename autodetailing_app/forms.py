@@ -14,7 +14,7 @@ class AddServiceForm(forms.ModelForm):
 class AddOpinionForm(forms.ModelForm):
     class Meta:
         model = Opinion
-        exclude = ['user']
+        exclude = ['user', 'created']
         labels = {'description': 'Opinia'}
 
 
@@ -26,9 +26,6 @@ class AddWorkerForm(forms.ModelForm):
 
 
 class CartForm(forms.ModelForm):
-    # service = forms.ModelChoiceField(queryset=Service.objects.all(), widget=forms.CheckboxSelectMultiple(), label='')
-    # worker = forms.ModelChoiceField(queryset=Worker.objects.all(), label='Pracownik')
-    # created = forms.DateField(widget=forms.SelectDateWidget(), label='Data realizacji usługi')
     class Meta:
         model = Cart
         exclude = ['user', 'services']

@@ -1,34 +1,35 @@
 <div class="topnav">
 
-  <!-- Left-aligned links (default) -->
-  <a href="{% url 'categories' %}">| KATEGORIE |</a>
-  <a href="{% url 'services' %}">| USŁUGI |</a>
+    <!-- Left-aligned links (default) -->
+    <a href="{% url 'categories' %}">| KATEGORIE |</a>
+    <a href="{% url 'services' %}">| USŁUGI |</a>
 
-  <!-- Right-aligned links -->
-  <div class="topnav-right">
-      <a href="{% url 'user-orders' %}"> | TWOJE ZAMÓWIENIA |</a>
-{#    {% if user.is_authenticated %}#}
-    <a href=""> |Wyloguj|</a>
-{#    {% else %}#}
-    <a href="">|Zaloguj|</a>
-    <a href="">|Rejestracja|</a>
-{#    {% endif %}#}
-  </div>
+    <!-- Right-aligned links -->
+    <div class="topnav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'user-orders' %}"> | TWOJE ZAMÓWIENIA |</a>
+            <a href="{% url 'logout' %}"> |Wyloguj|</a>
+        {% else %}
+            <a href="{% url 'login' %}">|Zaloguj|</a>
+            <a href="">|Rejestracja|</a>
+        {% endif %}
+    </div>
 </div>
 
 <!-- Dropdown-menu -->
 <div class="topnav">
     <!-- Centered link -->
-  <div class="topnav-centered">
-    <a href="{% url 'order' %}" class="active"> || UMÓW SIĘ ||</a>
-  </div>
+    <div class="topnav-centered">
+        <a href="{% url 'order' %}" class="active"> || KOSZYK ||</a>
+    </div>
     <!-- Left-aligned links (default) -->
     <a href="{% url 'opinion-add' %}">| Dodaj opinię |</a>
     <a href="{% url 'service-add' %}">| Dodaj usługę |</a>
     <a href="{% url 'worker-add' %}">| Dodaj pracownika |</a>
 
-  <!-- Right-aligned links -->
-  <div class="topnav-right">
-      <a href="{% url 'user-orders' %}">| Wszystkie zamówienia |</a>
-  </div>
+    <!-- Right-aligned links -->
+    <div class="topnav-right">
+        <a href="{% url 'all-orders' %}">| Wszystkie zamówienia |</a>
+        <a href="{% url 'all-opinions' %}">| Opinie |</a>
+    </div>
 </div>

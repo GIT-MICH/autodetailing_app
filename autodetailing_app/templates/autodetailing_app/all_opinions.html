@@ -1,0 +1,16 @@
+{% extends 'autodetailing_app/base_with_navbar.html' %}
+{% block nagłówek %}
+    <h2 style="margin: 0 auto; width: 656px; text-align: center;">AUTODETAILING SERVICE</h2>
+    <h3>Opinie:</h3>
+{% endblock %}
+
+{% block zawartość %}
+    <ul>
+    {% for opinion in opinions %}
+        <li>Użytkownik: {{ opinion.user }}</li>
+        <li>Nick: : <strong>{{ opinion.nick }}</strong></li>
+        <li> Treść opinii: {{ opinion.description }} </li>
+        <br>
+    {% endfor %}
+    </ul>
+{% endblock %}

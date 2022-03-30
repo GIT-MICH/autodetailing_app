@@ -10,8 +10,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style_buttons.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style_three_buttons.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'image_center.css' %}">
-
-
 </head>
 <body style="background-color: darkgrey">
 {% include 'autodetailing_app/nav_bar.html' %}
@@ -19,11 +17,11 @@
 
 {% block nagłówek %}
     <ul>
-        <div style="text-align: center">
+        <div style="text-align: center"></div>
             {% for category in categories %}
                 <li>{{ category.name }}: {{ category.description }}</li><br>
             {% endfor %}
-        </div>
+
     </ul>
 {% endblock %}
 
@@ -43,6 +41,5 @@
 <br>
 {#{{ date }}#}
 <br>
-
 </body>
 </html>
