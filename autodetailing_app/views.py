@@ -178,7 +178,10 @@ class UserOrdersView(View):
     def get(self, request):
         user = request.user
         orders = Order.objects.filter(user=user).order_by('meeting_date')
-        return render(request, 'autodetailing_app/user_orders.html', {'orders': orders})
+        if len(orders) > 0:
+            return render(request, 'autodetailing_app/user_orders.html', {'orders': orders})
+        message = 'Nie masz jeszcze żadnych zamówień.'
+        return render(request, 'autodetailing_app/user_orders.html', {'orders': orders, 'message': message})
 
 
 class AllOrdersView(View):

@@ -1,7 +1,11 @@
 {% extends 'autodetailing_app/base_with_navbar.html' %}
 {% block nagłówek %}
+    {% if message %}
+        <h3>{{ message }}</h3>
+    {%  else %}
     <h2 style="margin: 0 auto; width: 656px; text-align: center;">AUTODETAILING SERVICE</h2>
     <h3>Podsumowanie zamówień:</h3>
+    {%  endif %}
 {% endblock %}
 
 {% block zawartość %}
