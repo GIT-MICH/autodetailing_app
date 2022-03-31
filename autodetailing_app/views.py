@@ -134,7 +134,7 @@ class CreateOrderView(View):
         cart = user.cart
         if len(cart.services.all()) > 0:
             return render(request, 'autodetailing_app/order_form.html', {'form': form})
-        message = 'Koszyk jest pusty, wybierz usługi.'
+        message = 'Koszyk jest pusty, wybierz usługi...'
         return render(request, 'autodetailing_app/order_form.html', {'form': form, 'message': message})
         # return render(request, 'autodetailing_app/order_form.html', {'form': form})
 

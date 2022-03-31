@@ -17,8 +17,8 @@
 
 {% block user %}
     {% if user.is_authenticated %}
-        <h5 style="color: #333; text-align: right">Witaj {{ user.username }} !</h5>
-        <h5 style="color: #333; text-align: right">Dziś jest: {{ date }}</h5>
+        <h5 style="line-height: 0px; color: #333; text-align: right">Witaj {{ user.username }} !</h5>
+        <h5 style="line-height: 0px; color: #333; text-align: right">Dziś jest: {{ date }}</h5>
     {% endif %}
 {% endblock %}
 <br><br>
@@ -26,9 +26,11 @@
 {% block nagłówek %}
     <ul>
         <div style="text-align: center"></div>
-            {% for category in categories %}
-                <li><strong>{{ category.name }}</strong>: {{ category.description }}</li><br>
-            {% endfor %}
+        {% for category in categories %}
+            <li><strong>{{ category.name }}</strong></li>
+            <p style="line-height: 35px">{{ category.description }}</p>
+            <br>
+        {% endfor %}
 
     </ul>
 {% endblock %}
