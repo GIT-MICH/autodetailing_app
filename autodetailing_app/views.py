@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
@@ -127,7 +128,7 @@ class AddWorkerView(View):
 #         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
 
 
-class CreateOrderView(View):
+class CreateOrderView(LoginRequiredMixin, View):
     def get(self, request):
         form = OrderForm()
         user = request.user
@@ -143,9 +144,14 @@ class CreateOrderView(View):
         if form.is_valid():
             worker = form.cleaned_data.get('worker')
             meeting_date = form.cleaned_data.get('meeting_date')
+            # date_to_str = meeting_date.strftime('%Y-%m-%d')
             user = request.user
             cart = user.cart
             choose_services = cart.services.all()
+            check_day = Order.objects.filter(meeting_date=meeting_date).count()
+            if check_day > 0:
+                error_date = "Wybrany termin jest już zajety, wybierz inny."
+                return render(request, 'autodetailing_app/order_form.html', {'form': form, 'message': error_date})
             order = Order.objects.create(worker=worker, meeting_date=meeting_date, user=user)
             order.services.set(choose_services)
             cart.services.set([])
@@ -153,7 +159,7 @@ class CreateOrderView(View):
         return render(request, 'autodetailing_app/order_form.html', {'form': form})
 
 
-class AddServiceToCartView(View):
+class AddServiceToCartView(LoginRequiredMixin, View):
     def get(self, request, service_id):
         service = Service.objects.get(pk=service_id)
         user = request.user

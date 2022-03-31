@@ -14,8 +14,9 @@
         {% endfor %}
         <br>
         <a class="button button2" href="{{ service.add_to_card_url }}">DODAJ DO KOSZYKA</a>
-        {% if service.image %}
-            <img src="{{ service.image.url }}" class="center">
-        {% endif %}
     </ul>
+    <br><br>
+    {% if service.image %}
+            <img src="{{ service.image.url }}" class="center">
+    {% endif %}
 {% endblock %}

@@ -9,7 +9,9 @@
     {% for service in services %}
         <li>{{ service.upper_name }}
             <a class="button-one" title="Wyświetla szczegóły usługi" href="{{ service.get_absolute_url }}">Szczegóły</a>
+            {% if user.is_superuser %}
             <a class="button-two" title="Usuwa usługę z listy" href="{{ service.remove_url }}">Usuń</a>
+            {% endif %}
             <a class="button-three" title="Dodaje usługę do koszyka" href="{{ service.add_to_card_url }}">DO KOSZYKA</a>
         </li>
         <br>

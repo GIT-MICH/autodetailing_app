@@ -7,7 +7,9 @@
 {% block zawartość %}
     <ul>
     {% for opinion in opinions %}
+        {% if user.is_superuser %}
         <li>Użytkownik: {{ opinion.user }}</li>
+        {% endif %}
         <li>Nick: : <strong>{{ opinion.nick }}</strong></li>
         <li> Treść opinii: {{ opinion.description }} </li>
         <br>

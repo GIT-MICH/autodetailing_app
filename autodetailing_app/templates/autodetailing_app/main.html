@@ -29,17 +29,17 @@
 
 {% block zawartość %}
     <p>{{ about.description }}</p>
+    <br><br>
 {% endblock %}
-
-<br>
-<img src="{% static 'img.png' %}" alt="Autodetailing" class="center">
-<br><br>
-<footer>
-    <p style="text-align: center; font-size: small">© 2022 M.Złakowski</p>
-</footer>
-<br>
-{#{{ date }}#}
-<br>
-
+<div>
+    <br><br>
+    <img src="{% static 'img.png' %}" alt="Autodetailing" class="center">
+    <br><br>
+    <footer>
+        <p style="text-align: center; font-size: small">© 2022 M.Złakowski</p>
+    </footer>
+    <br>
+    <br>
+</div>
 </body>
 </html>

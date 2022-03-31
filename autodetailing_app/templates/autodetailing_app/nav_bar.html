@@ -4,7 +4,7 @@
     <div class="topnav-centered">
 
         <p>
-            <a href="{% url 'main' %}" class="active"> || STRONA GŁÓWNA ||</a>
+            <a href="{% url 'main' %}" class="active"> || AUTODETAILING SERVICE ||</a>
         </p>
     </div>
 
@@ -32,18 +32,21 @@
         <a href="{% url 'order' %}" class="active"> || KOSZYK ||</a>
     </div>
     <!-- Left-aligned links (default) -->
-     {% if user.is_authenticated %}
-    <a href="{% url 'opinion-add' %}">| Dodaj opinię |</a>
-    <a href="{% url 'service-add' %}">| Dodaj usługę |</a>
-    <a href="{% url 'worker-add' %}">| Dodaj pracownika |</a>
-    {%  endif %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'opinion-add' %}">| Dodaj opinię |</a>
+    {% endif %}
+    {% if user.is_superuser %}
+        <a href="{% url 'service-add' %}">| Dodaj usługę |</a>
+        <a href="{% url 'worker-add' %}">| Dodaj pracownika |</a>
+    {% endif %}
 
     <!-- Right-aligned links -->
     <div class="topnav-right">
-         {% if user.is_authenticated %}
+         {% if user.is_superuser %}
         <a href="{% url 'all-orders' %}">| Wszystkie zamówienia |</a>
-        <a href="{% url 'all-opinions' %}">| Opinie |</a>
         {% endif %}
+        <a href="{% url 'all-opinions' %}">| Opinie |</a>
+
     </div>
 </div>
 <!-- End second navbar -->

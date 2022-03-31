@@ -1,5 +1,9 @@
 {% extends 'autodetailing_app/base_with_navbar.html' %}
 {% block nagłówek %}
+    {% if error_date %}
+    <h3 style="text-align: left">{{ error_date }}</h3>
+        <br><br>
+    {% endif %}
     {% if message %}
     <h3 style="text-align: center">{{ message }}</h3>
         <br><br>

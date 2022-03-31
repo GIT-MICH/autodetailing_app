@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='cart',
-            name='created',
+            name='meeting_date',
             field=models.DateTimeField(),
         ),
     ]
