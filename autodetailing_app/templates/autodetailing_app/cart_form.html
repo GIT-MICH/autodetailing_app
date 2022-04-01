@@ -1,6 +1,7 @@
 {% extends 'autodetailing_app/base_with_navbar.html' %}
 {% block nagłówek %}
     <h3>JUŻ PRAWIE KONIEC... :)</h3>
+    <br><br>
     <h4>Wybrane usługi do realizacji:</h4>
     <ul>
         {% for service in user.cart.services.all %}

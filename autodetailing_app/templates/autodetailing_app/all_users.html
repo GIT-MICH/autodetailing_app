@@ -1,0 +1,18 @@
+{% extends 'autodetailing_app/base_with_navbar.html' %}
+{% block nagłówek %}
+    <h2 style="margin: 0 auto; width: 656px; text-align: center;">AUTODETAILING SERVICE</h2>
+    <h3>Wszyscy użytkownicy:</h3>
+{% endblock %}
+
+{% block zawartość %}
+    <ul>
+    {% for user in users %}
+{#        {% if user.is_superuser %}#}
+        <li>Użytkownik: {{ user.username }}
+                <a class="button button2" href="set_permission/{{ user.id }}/">Ustaw uprawnienia</a>
+        </li>
+{#        {% endif %}#}
+        <br>
+    {% endfor %}
+    </ul>
+{% endblock %}

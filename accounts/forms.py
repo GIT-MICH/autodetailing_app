@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
@@ -10,9 +11,14 @@ class LoginForm(forms.Form):
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'password', 'first_name', 'last_name']
+        fields = ['username', 'password', 'email']
         widgets = {
-            'password': forms.PasswordInput()
+            'password': forms.PasswordInput(),
+            'email': forms.EmailInput()
+        }
+        help_texts = {
+            'username': None,
+            'password': '|Hasło musi być unikalne|'
         }
 
 

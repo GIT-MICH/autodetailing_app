@@ -150,7 +150,7 @@ class CreateOrderView(LoginRequiredMixin, View):
             choose_services = cart.services.all()
             check_day = Order.objects.filter(meeting_date=meeting_date).count()
             if check_day > 0:
-                error_date = "Wybrany termin jest już zajety, wybierz inny."
+                error_date = "Przykro nam, wybrany termin jest już zajety, wybierz inny."
                 return render(request, 'autodetailing_app/order_form.html', {'form': form, 'message': error_date})
             order = Order.objects.create(worker=worker, meeting_date=meeting_date, user=user)
             order.services.set(choose_services)
@@ -186,7 +186,7 @@ class UserOrdersView(View):
         orders = Order.objects.filter(user=user).order_by('meeting_date')
         if len(orders) > 0:
             return render(request, 'autodetailing_app/user_orders.html', {'orders': orders})
-        message = 'Nie masz jeszcze żadnych zamówień.'
+        message = 'Ups, nie masz jeszcze żadnych zamówień.'
         return render(request, 'autodetailing_app/user_orders.html', {'orders': orders, 'message': message})
 
 
@@ -194,3 +194,4 @@ class AllOrdersView(View):
     def get(self, request):
         orders = Order.objects.all()
         return render(request, 'autodetailing_app/all_orders.html', {'orders': orders})
+

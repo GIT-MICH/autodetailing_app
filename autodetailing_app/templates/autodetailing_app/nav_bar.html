@@ -43,6 +43,7 @@
     <!-- Right-aligned links -->
     <div class="topnav-right">
          {% if user.is_superuser %}
+        <a href="{% url 'all-users' %}">| Użytkownicy |</a>
         <a href="{% url 'all-orders' %}">| Wszystkie zamówienia |</a>
         {% endif %}
         <a href="{% url 'all-opinions' %}">| Opinie |</a>

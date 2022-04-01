@@ -1,25 +1,25 @@
 {% extends 'autodetailing_app/base_with_navbar.html' %}
 {% block nagłówek %}
     {% if error_date %}
-    <h3 style="text-align: left">{{ error_date }}</h3>
+        <h3 style="text-align: left; color: #4b4949">{{ error_date }}</h3>
         <br><br>
     {% endif %}
     {% if message %}
-    <h3 style="text-align: center">{{ message }}</h3>
+        <h3 style="text-align: center; color: #4b4949">{{ message }}</h3>
         <br><br>
     {% else %}
-    <h3>JUŻ PRAWIE KONIEC... :)</h3>
-    <h4>Wybrane usługi do realizacji:</h4>
+        <h3>JUŻ PRAWIE KONIEC... :)</h3>
+        <br>
+        <h4>Wybrane usługi do realizacji:</h4>
     {% endif %}
-    <ul>
+    <div>
         {% for service in user.cart.services.all %}
-            <li>{{ service.upper_name }}
-                <br>
+            <p><strong>{{ forloop.counter }}.</strong> {{ service.upper_name }}
                 <a class="button-one" title="Usuwa usługę z koszyka" href="{{ service.remove_service_url }}">USUŃ Z KOSZYKA</a>
-            </li>
+            </p>
             <br>
         {% endfor %}
-    </ul>
+    </div>
 
 {% endblock %}
 
