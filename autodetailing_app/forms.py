@@ -48,6 +48,6 @@ class OrderForm(forms.ModelForm):
         }
         labels = {
             'services': '',
-            'worker': 'Pracownik',
+            'worker': 'Wybierz pracownika',
             'meeting_date': 'Data realizacji'
         }

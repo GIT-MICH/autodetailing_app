@@ -10,8 +10,7 @@
         {% if user.is_superuser %}
         <li>Użytkownik: {{ opinion.user }}</li>
         {% endif %}
-        <li>Nick: : <strong>{{ opinion.nick }}</strong></li>
-        <li> Treść opinii: {{ opinion.description }} </li>
+        <li>Użytkownik: "<strong>{{ opinion.nick }}</strong>" napisał: <strong>{{ opinion.description }}</strong></li>
         <br>
     {% endfor %}
     </ul>

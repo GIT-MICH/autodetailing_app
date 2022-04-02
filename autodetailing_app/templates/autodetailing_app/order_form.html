@@ -17,6 +17,8 @@
             <p><strong>{{ forloop.counter }}.</strong> {{ service.upper_name }}
                 <a class="button-one" title="Usuwa usługę z koszyka" href="{{ service.remove_service_url }}">USUŃ Z KOSZYKA</a>
             </p>
+            <p>Cena: <strong>{{ service.price }} zł</strong></p>
+            <p>-------------------------------------------------------------------------------------------------------</p>
             <br>
         {% endfor %}
     </div>
