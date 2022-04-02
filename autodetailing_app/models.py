@@ -13,6 +13,10 @@ class Service(models.Model):
     price = models.FloatField(verbose_name='Cena (zł)', default=0)
     categories = models.ManyToManyField('Category')
 
+    class Meta:
+        verbose_name = 'Usługa'
+        verbose_name_plural = 'Usługi'
+
     def get_absolute_url(self):
         return reverse('service-detail', args=(self.id,))
 
@@ -42,6 +46,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Kategoria'
+        verbose_name_plural = 'Kategorie'
+
 
 class Worker(models.Model):
     name = models.CharField(max_length=64)
@@ -49,12 +57,19 @@ class Worker(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Pracownik'
+        verbose_name_plural = 'Pracownicy'
+
 
 class Cart(models.Model):
     services = models.ManyToManyField(Service)
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE, default=None, null=True)
     meeting_date = models.DateField(null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return ", ".join([str(t) for t in self.services.all()])
 
     def get_total_value(self):
         suma = 0
@@ -68,13 +83,25 @@ class Cart(models.Model):
             total += service.duration
         return round(total / 60, 0)
 
+    class Meta:
+        verbose_name = 'Koszyk'
+        verbose_name_plural = 'Koszyk'
+
 
 class Order(models.Model):
-    services = models.ManyToManyField(Service)
-    worker = models.ForeignKey(Worker, on_delete=models.CASCADE, default=None, null=True)
-    created = models.DateTimeField(auto_now_add=True)
-    meeting_date = models.DateField(null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    services = models.ManyToManyField(Service, verbose_name='Zamówienia')
+    worker = models.ForeignKey(Worker, on_delete=models.CASCADE, default=None, null=True, verbose_name='Pracownik')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Utworzono')
+    meeting_date = models.DateField(null=True, verbose_name='Dzień')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Użytkownik')
+    is_done = models.BooleanField(default=False, verbose_name="Czy zamówienie zostało zrealizowane?")
+
+    def __str__(self):
+        return ", ".join([str(t) for t in self.services.all()])
+
+    class Meta:
+        verbose_name = 'Zamówienie'
+        verbose_name_plural = 'Zamówienia'
 
 # class OpeningHours(models.Model):
 #     day_name = models.CharField(max_length=32, unique=True)
@@ -88,6 +115,13 @@ class Opinion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     nick = models.CharField(max_length=64)
     description = models.TextField()
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = 'Opinia'
+        verbose_name_plural = 'Opinie'
 
 
 class About(models.Model):

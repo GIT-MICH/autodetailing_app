@@ -132,7 +132,10 @@ class CreateOrderView(LoginRequiredMixin, View):
     def get(self, request):
         form = OrderForm()
         user = request.user
-        cart = user.cart
+        if hasattr(user, 'cart'):
+            cart = user.cart
+        else:
+            cart = Cart.objects.create(user=user)
         if len(cart.services.all()) > 0:
             return render(request, 'autodetailing_app/order_form.html', {'form': form})
         message = 'Koszyk jest pusty, wybierz usługi...'
@@ -144,7 +147,6 @@ class CreateOrderView(LoginRequiredMixin, View):
         if form.is_valid():
             worker = form.cleaned_data.get('worker')
             meeting_date = form.cleaned_data.get('meeting_date')
-            # date_to_str = meeting_date.strftime('%Y-%m-%d')
             user = request.user
             cart = user.cart
             choose_services = cart.services.all()
