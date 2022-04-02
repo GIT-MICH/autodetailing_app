@@ -6,7 +6,7 @@ def is_done(model_admin, request, query_set):
     query_set.update(is_done=True)
 
 
-is_done.short_description = "Usługa została zrealizowana w terminie."
+is_done.short_description = "Zamówienie zrealizowane !"
 
 
 @admin.register(Order)
@@ -21,6 +21,5 @@ class OrderAdmin(admin.ModelAdmin):
 admin.site.register(Service)
 admin.site.register(Category)
 admin.site.register(Worker)
-# admin.site.register(Order)
 admin.site.register(Cart)
 admin.site.register(Opinion)

@@ -42,7 +42,7 @@ class CartForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        exclude = ['user', 'services', 'created']
+        exclude = ['user', 'services', 'created', 'is_done']
         widgets = {
             'meeting_date': forms.SelectDateWidget()
         }
