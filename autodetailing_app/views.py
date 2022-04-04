@@ -30,7 +30,7 @@ class AddServiceView(View):
         return render(request, 'autodetailing_app/service_form.html', {'form': form})
 
     def post(self, request):
-        form = AddServiceForm(request.POST)
+        form = AddServiceForm(request.POST, request.FILES)
         if form.is_valid():
             service = form.save()
             return redirect('services')
@@ -124,7 +124,7 @@ class AddWorkerView(View):
 #             cart.worker = worker
 #             cart.meeting_date = meeting_date
 #             cart.save()
-#             return redirect('cart') #tutaj link do twoich zamowien
+#             return redirect('cart')
 #         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
 
 

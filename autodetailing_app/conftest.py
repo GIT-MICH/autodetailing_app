@@ -35,14 +35,13 @@ def service(some_id):
     return Service.objects.create(pk=some_id)
 
 
+@pytest.fixture
+def cart(user):
+    return Cart.objects.create(user=user)
 
 
 
-# @pytest.fixture
-# def author():
-#     return Author.objects.create(first_name='slawek', last_name='bo')
-#
-#
+
 # @pytest.fixture
 # def books(author):
 #     lst = []
