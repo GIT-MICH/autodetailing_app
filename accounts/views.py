@@ -67,5 +67,5 @@ class UserPermissionUpdateView(View):
 
 class AllAccountsView(View):
     def get(self, request):
-        users = User.objects.all()
+        users = User.objects.all().order_by('id')
         return render(request, 'autodetailing_app/all_users.html', {'users': users})

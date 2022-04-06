@@ -4,6 +4,10 @@ from django.urls import reverse
 from django.utils import timezone
 
 
+def get_absolute_url(self):
+    return reverse('service-detail', args=(self.id,))
+
+
 class Service(models.Model):
     name = models.CharField(max_length=128, verbose_name='Nazwa usługi')
     image = models.ImageField(blank=True, null=True, verbose_name='Dodaj plik')

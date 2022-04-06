@@ -40,6 +40,21 @@ def cart(user):
     return Cart.objects.create(user=user)
 
 
+@pytest.fixture
+def is_done():
+    return True
+
+
+@pytest.fixture
+def worker(some_id):
+    return Worker.objects.create(pk=some_id)
+
+
+@pytest.fixture
+def order(some_id):
+    return Order.objects.create(pk=some_id)
+
+
 
 
 # @pytest.fixture
