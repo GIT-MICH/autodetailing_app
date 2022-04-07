@@ -5,7 +5,7 @@ import pytest
 from django.urls import reverse
 
 from autodetailing_app.forms import AddServiceForm, AddOpinionForm, AddWorkerForm, OrderForm
-from autodetailing_app.models import Service, Opinion, Worker, Order
+from autodetailing_app.models import Service, Opinion, Worker, Order, Cart
 
 
 @pytest.mark.django_db
@@ -43,7 +43,7 @@ def test_inside(category_id_2):
 @pytest.mark.django_db
 def test_add_to_card_not_login(some_id):
     client = Client()
-    url = reverse('add-service-to-card', args=some_id)
+    url = reverse('add-service-to-card', args=(some_id,))
     response = client.get(url)
     assert response.status_code == 302
     url = reverse('login')
@@ -54,12 +54,12 @@ def test_add_to_card_not_login(some_id):
 def test_add_to_card_login(user, some_id, service):
     client = Client()
     client.force_login(user)
-    url = reverse('add-service-to-card', args=some_id)
+    url = reverse('add-service-to-card', args=(some_id,))
     response = client.get(url)
+    assert Cart.objects.count() == 1
     assert response.status_code == 302
     new_url = reverse('services')
     assert response.url.startswith(new_url)
-    # assert response.context['services'].count() == 0
 
 
 @pytest.mark.django_db
@@ -83,8 +83,7 @@ def test_add_service_view_post(category):
         'categories': [category.id]
     }
     response = client.post(url, data)
-    # form = response.context['form']
-    # print(form.errors)
+    assert Service.objects.count() == 1
     assert response.status_code == 302
     new_url = reverse('services')
     assert response.url.startswith(new_url)
@@ -94,7 +93,7 @@ def test_add_service_view_post(category):
 @pytest.mark.django_db
 def test_del_service(some_id, service):
     client = Client()
-    url = reverse('service-delete', args=some_id)
+    url = reverse('service-delete', args=(some_id,))
     response = client.get(url)
     assert Service.objects.count() == 0
     assert response.status_code == 302
@@ -121,6 +120,7 @@ def test_add_opinion_post(user):
         'description': 'IS THE BEST'
     }
     response = client.post(url, data)
+    assert Opinion.objects.count() == 1
     assert response.status_code == 302
     new_url = reverse('main')
     assert response.url.startswith(new_url)
@@ -133,6 +133,7 @@ def test_all_opinions():
     url = reverse('all-opinions')
     response = client.get(url)
     assert response.status_code == 200
+    assert response.context['opinions'].count() == 0
 
 
 @pytest.mark.django_db
@@ -152,6 +153,7 @@ def test_add_worker_post():
         'name': 'python is the best'
     }
     response = client.post(url, data)
+    assert Worker.objects.count() == 1
     assert response.status_code == 302
     new_url = reverse('worker-add')
     assert response.url.startswith(new_url)
@@ -164,12 +166,13 @@ def test_services():
     url = reverse('services')
     response = client.get(url)
     assert response.status_code == 200
+    assert response.context['services'].count() == 0
 
 
 @pytest.mark.django_db
 def test_service_detail(some_id, service):
     client = Client()
-    url = reverse('service-detail', args=some_id)
+    url = reverse('service-detail', args=(some_id,))
     response = client.get(url)
     assert response.status_code == 200
 
@@ -178,7 +181,7 @@ def test_service_detail(some_id, service):
 def test_remove_service_from_cart(some_id, service, user, cart):
     client = Client()
     client.force_login(user)
-    url = reverse('remove-service', args=some_id)
+    url = reverse('remove-service', args=(some_id,))
     response = client.get(url)
     assert cart.services.count() == 0
     assert response.status_code == 302
@@ -206,11 +209,10 @@ def test_create_order_view_post(user, cart, service, is_done, worker):
         'worker': worker.id,
         'user': user,
         'is_done': is_done,
-        'meeting_date': '2020-01-01'
+        'meeting_date': '2022-04-04'
     }
     response = client.post(url, data)
-    # form = response.context['form']
-    # print(form.errors)
+    assert Order.objects.count() == 1
     assert response.status_code == 302
     new_url = reverse('user-orders')
     assert response.url.startswith(new_url)
@@ -220,77 +222,17 @@ def test_create_order_view_post(user, cart, service, is_done, worker):
 @pytest.mark.django_db
 def test_user_orders_view(user):
     client = Client()
+    client.force_login(user)
     url = reverse('user-orders')
-
-# @pytest.mark.django_db
-# def test_add_publisher_get():
-#     client = Client()
-#     url = reverse('add_publisher_model')
-#     response = client.get(url)
-#     assert response.status_code == 200
-#     assert isinstance(response.context['form'], AddPublisherModelForm)
-
-# @pytest.mark.django_db
-# def test_add_publisher_post():
-#     client = Client()
-#     url = reverse('add_publisher_model')
-#     date = {
-#         'name':'ala',
-#         'address' : 'poznanska',
-#         "street" : "poznanska",
-#         "city" : "bździna dolna",
-#         'description':'najlepsze wyd na świecie'
-#     }
-#     response = client.post(url, date)
-#     assert response.status_code == 302
-#     new_url = reverse('list_author')
-#     assert response.url.startswith(new_url)
-#     Publisher.objects.get(**date)
+    response = client.get(url)
+    assert response.status_code == 200
+    assert response.context['orders'].count() == 0
 
 
-# @pytest.mark.django_db
-# def test_booklist_login(user):
-#     client = Client()
-#     client.force_login(user)
-#     url = reverse('list_books')
-#     response = client.get(url)
-#     assert response.status_code == 200
-#     assert response.context['object_list'].count() == 0
-
-# @pytest.mark.django_db
-# def test_booklist_not_login():
-#     client = Client()
-#     url = reverse('list_books')
-#     response = client.get(url)
-#     assert response.status_code == 302
-#     url = reverse('login')
-#     assert response.url.startswith(url)
-#
-
-#
-#
-# @pytest.mark.django_db
-# def test_booklist_login(user, books):
-#     client = Client()
-#     client.force_login(user)
-#     url = reverse('list_books')
-#     response = client.get(url)
-#     assert response.status_code == 200
-#     assert response.context['object_list'].count() == len(books)
-#     for book in books:
-#         assert book in response.context['object_list']
-#
-#
-# @pytest.mark.django_db
-# def test_book_update_view(books):
-#     book = books[0]
-#     client = Client()
-#     url = reverse('update_book', args=(book.id,))
-#     data = {
-#         'title':'?',
-#         'year':123,
-#         'author': book.author.id#### TO JEST WAŻNE
-#     }
-#     response = client.post(url, data)
-#
-#     Book.objects.get(title="?")
+@pytest.mark.django_db
+def test_all_orders_view():
+    client = Client()
+    url = reverse('all-orders')
+    response = client.get(url)
+    assert response.status_code == 200
+    assert response.context['orders'].count() == 0

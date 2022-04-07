@@ -53,18 +53,3 @@ def worker(some_id):
 @pytest.fixture
 def order(some_id):
     return Order.objects.create(pk=some_id)
-
-
-
-
-# @pytest.fixture
-# def books(author):
-#     lst = []
-#     for i in range(10):
-#         x = Book.objects.create(
-#             title=i,
-#             year=i,
-#             author=author
-#         )
-#         lst.append(x)
-#     return lst
