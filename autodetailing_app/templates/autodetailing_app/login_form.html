@@ -1,4 +1,5 @@
 {% extends 'autodetailing_app/base_with_navbar.html' %}
+
 {% block nagłówek %}
     <h3>ZALOGUJ SIĘ:</h3>
 {% endblock %}
@@ -7,6 +8,11 @@
     <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+        {% if message %}
+        <h6 style="text-align: left; color: #4b4949">{{ message }}</h6>
+        <br>
+    {% endif %}
     <input style="background-color: darkorange; font-size: 16px" type="submit" value="ZALOGUJ">
+
     </form>
 {% endblock %}

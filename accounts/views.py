@@ -27,7 +27,8 @@ class LoginView(View):
                     cart = Cart.objects.create(user=user)
                 redirect_url = request.GET.get('next', 'main')
                 return redirect(redirect_url)
-            return render(request, 'autodetailing_app/login_form.html', {'form': form})
+        message = "Podany login lub hasło jest nieprawidłowe !"
+        return render(request, 'autodetailing_app/login_form.html', {'form': form, 'message': message})
 
 
 class LogoutView(View):
