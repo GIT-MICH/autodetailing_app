@@ -106,28 +106,6 @@ class AddWorkerView(View):
         return render(request, 'autodetailing_app/worker_form.html', {'form': form})
 
 
-# class CartView(View):
-#     def get(self, request):
-#         form = CartForm()
-#         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
-#
-#     def post(self, request):
-#         form = CartForm(request.POST)
-#         if form.is_valid():
-#             worker = form.cleaned_data.get('worker')
-#             meeting_date = form.cleaned_data.get('meeting_date')
-#             user = request.user
-#             if hasattr(user, 'cart'):
-#                 cart = user.cart
-#             else:
-#                 cart = Cart.objects.create(worker=worker, meeting_date=meeting_date, user=user)
-#             cart.worker = worker
-#             cart.meeting_date = meeting_date
-#             cart.save()
-#             return redirect('cart')
-#         return render(request, 'autodetailing_app/cart_form.html', {'form': form})
-
-
 class CreateOrderView(LoginRequiredMixin, View):
     def get(self, request):
         form = OrderForm()
@@ -140,7 +118,6 @@ class CreateOrderView(LoginRequiredMixin, View):
             return render(request, 'autodetailing_app/order_form.html', {'form': form})
         message = 'Koszyk jest pusty, wybierz usługi...'
         return render(request, 'autodetailing_app/order_form.html', {'form': form, 'message': message})
-        # return render(request, 'autodetailing_app/order_form.html', {'form': form})
 
     def post(self, request):
         form = OrderForm(request.POST)

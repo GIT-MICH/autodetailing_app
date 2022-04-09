@@ -13,12 +13,11 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ['username', 'password', 'email']
         widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput()
+            'password': forms.PasswordInput(attrs={'placeholder': 'Użyj conajmniej 8 znaków'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'kowalski@poczta.pl '})
         }
         help_texts = {
             'username': None,
-            'password': '|Hasło musi być unikalne|'
         }
 
 
