@@ -4,10 +4,6 @@ from django.urls import reverse
 from django.utils import timezone
 
 
-def get_absolute_url(self):
-    return reverse('service-detail', args=(self.id,))
-
-
 class Service(models.Model):
     name = models.CharField(max_length=128, verbose_name='Nazwa usługi')
     image = models.ImageField(blank=True, null=True, verbose_name='Dodaj plik')
@@ -107,13 +103,6 @@ class Order(models.Model):
         verbose_name = 'Zamówienie'
         verbose_name_plural = 'Zamówienia'
 
-# class OpeningHours(models.Model):
-#     day_name = models.CharField(max_length=32, unique=True)
-#     hours = models.CharField(max_length=32)
-#
-#     def __str__(self):
-#         return self.day_name
-
 
 class Opinion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -134,3 +123,10 @@ class About(models.Model):
     def __str__(self):
         return self.description
 
+
+# class OpeningHours(models.Model):
+#     day_name = models.CharField(max_length=32, unique=True)
+#     hours = models.CharField(max_length=32)
+#
+#     def __str__(self):
+#         return self.day_name

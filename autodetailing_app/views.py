@@ -1,6 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, reverse
-from django.urls import reverse_lazy
 from django.views import View
 
 from autodetailing_app.forms import AddServiceForm, AddOpinionForm, AddWorkerForm, CartForm, OrderForm
