@@ -1,15 +1,18 @@
 Final project of the 'Python Developer' course (at CodersLab)
 
-Project idea: The purpose of the created application is to manage services in the autodetailing studio. Services can be ordered by the user who is 
-logged in. After adding services to the cart, selecting the employee and the date of the meeting, you can order the service. 
+Project idea: The purpose of the created application is to manage services in the autodetailing studio but they can be anything you like. Services can be ordered by the user who is logged in. After adding services to the cart, selecting the employee and the date of the meeting, you can order the service. 
 When ordering, you can see a summary of what the cost will be and the approximate time to complete. 
 The user can add an opinion about the service performed.
 
 Thanks to this application, managers can efficiently organize orders, add services, modify, etc.
 
 
-** APP SUMMARY ** MODELS: 0. USER
+** APP SUMMARY ** 
 
+
+MODELS: 7. 
+
+    User
     Category, 
     Service, 
     About, 
@@ -17,7 +20,7 @@ Thanks to this application, managers can efficiently organize orders, add servic
     Order, 
     Opinion
 
-FORMS
+FORMS:
 
     LoginForm
     RegisterForm
