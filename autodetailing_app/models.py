@@ -99,6 +99,9 @@ class Order(models.Model):
     def __str__(self):
         return ", ".join([str(t) for t in self.services.all()])
 
+    def delete_order_url(self):
+        return reverse('delete-order', args=(self.id,))
+
     class Meta:
         verbose_name = 'Zamówienie'
         verbose_name_plural = 'Zamówienia'

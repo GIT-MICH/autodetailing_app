@@ -15,6 +15,7 @@ from autodetailing_app.views import (MainView,
                                      CreateOrderView,
                                      UserOrdersView,
                                      AllOrdersView,
+                                     DeleteOrderView,
                                      )
 
 urlpatterns = [
@@ -34,4 +35,5 @@ urlpatterns = [
     path('order/', CreateOrderView.as_view(), name='order'),
     path('user_orders/', UserOrdersView.as_view(), name='user-orders'),
     path('all_orders/', AllOrdersView.as_view(), name='all-orders'),
+    path('delete_order/<int:order_id>', DeleteOrderView.as_view(), name='delete-order')
 ]

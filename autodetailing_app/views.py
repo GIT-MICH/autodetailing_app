@@ -173,3 +173,9 @@ class AllOrdersView(View):
         orders = Order.objects.all()
         return render(request, 'autodetailing_app/all_orders.html', {'orders': orders})
 
+
+class DeleteOrderView(View):
+    def get(self, request, order_id):
+        order = Order.objects.get(pk=order_id)
+        order.delete()
+        return redirect('user-orders')
