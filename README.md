@@ -32,6 +32,7 @@ FORMS:
     OrderForm
 
 VIEWS:
+
     '', FirstView
     'main/', MainView
     'categories/', CategoriesView
