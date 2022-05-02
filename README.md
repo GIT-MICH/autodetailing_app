@@ -12,7 +12,7 @@ Thanks to this application, managers can efficiently organize orders, add servic
 
 MODELS: 7. 
 
-    User
+    User,
     Category, 
     Service, 
     About, 
@@ -22,13 +22,13 @@ MODELS: 7.
 
 FORMS:
 
-    LoginForm
-    RegisterForm
-    UpdateUserPermisionForm
-    AddServiceForm
-    AddOpinionForm
-    AddWorkerForm
-    CartForm
+    LoginForm,
+    RegisterForm,
+    UpdateUserPermisionForm,
+    AddServiceForm,
+    AddOpinionForm,
+    AddWorkerForm,
+    CartForm,
     OrderForm
 
 VIEWS:
